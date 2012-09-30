@@ -1,0 +1,12 @@
+%strong{:class => ["notice", ((request.post?) ? "error" : "warning")]}=((request.post?) ? "Login failed. Please check your credentials." : ((params[:logged_out]) ? "You have been logged out." : "Please login to proceed."))
+.form-box
+  %form{:method=>"post", :action=>"/login"}
+    %input{:type => 'hidden', :name => 'authenticity_token', :value => form_authenticity_token}
+    %p
+      %label="Email:"
+      %input{:name=>"email", :size=>40}
+    %p
+      %label="Password:"
+      %input{:name=>"password", :type=>"password", :size=>40}
+    %p
+      %button{:type=>"submit"}="Submit"

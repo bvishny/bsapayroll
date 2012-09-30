@@ -1,0 +1,21 @@
+- if request.post?
+  %strong{:class => ["notice", ((@timesheet.errors.empty?) ? "success" : "error")]}=((@timesheet.errors.empty?) ? "Timesheet saved. You can edit this sheet until 11:59 PM Sunday." : @timesheet.errors.first[1].to_s)
+- else
+  %p="Please enter the hours you worked each day. Provide additional comments if your hours differ from normal."
+.form-box
+  %form{:method=>"post", :action=>"/user"}
+    %input{:type => 'hidden', :name => 'authenticity_token', :value => form_authenticity_token}
+    %table{:class => "timesheet"}
+      %tr
+        %th="Day"
+        %th="# Hours"
+      - (@user.timesheet.begins..@user.timesheet.ends).to_a.each_with_index do |date, i|
+        %tr
+          %td=date.strftime("%a %d")
+          %td
+            %input{:name=>"timesheet[day_#{i}]", :size => 2, :value=>@user.timesheet.send("day_#{i}")}
+    %span{:class=>"total"}="Total Hours: #{@user.timesheet.hours} ==> #{number_to_currency(@user.timesheet.wages)} before taxes"
+    %label="Comments:"
+    %textarea{:name => "timesheet[comments]", :cols => 40, :rows => 5}=@user.timesheet.comments
+    %button{:type=>"Submit"}="Update Payroll"
+  

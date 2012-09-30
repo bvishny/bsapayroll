@@ -1,0 +1,180 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+@import "reset.css";
+
+body {
+	background-color:#FCFCFC;
+	font-family:Arial, Helvetica;
+	font-size:14px;
+}
+
+div#container {
+	position:relative;
+	margin-top:25px;
+	margin-bottom:25px;
+	width:500px;
+	margin-right:auto;
+	margin-left:auto;
+}
+
+div.box {
+	width:500px;
+	min-height:200px;
+	background-color:#F7F7F7;
+	border:3px outset #F7F7F7;
+}
+
+div.box-title {
+	background-color:#666666;
+	color:#FFF;
+	font-size:20px;
+	font-weight:bold;
+	padding:8px 11px;
+}
+
+div.box-content {
+	padding:15px;
+	line-height:20px;
+}
+
+strong.notice {
+	padding:5px 8px;
+	display:block;
+	font-weight:bold;
+}
+
+strong.warning {
+	color:#666;
+	background-color:#FFFF99;
+	border:1px solid #BDBD72;
+}
+
+strong.error {
+	color:#666;
+	background-color:#FF8784;
+	border:1px solid #D40000;
+}
+
+strong.success {
+	color:#666;
+	background-color:#33CC66;
+	border:1px solid #339966;
+}
+
+div.form-box {
+	padding:5px;
+	margin-top:10px;
+	line-height:24px;
+}
+
+div.form-box label {
+	display:block;
+	font-size:16px;
+	font-weight:500;
+}
+
+div.form-box button {
+	background:#666;
+	color:#FFF;
+	font-size:16px;
+	padding:5px 8px;
+	border:1px outset #666;
+	margin-top:10px;
+}
+
+table.timesheet {
+  font-size:16px;
+  font-weight:500;
+  margin-bottom:10px;
+}
+
+table.timesheet th {
+	background-color:#999;
+	color:#FFF;
+	font-weight:bold;
+	padding:8px 11px;
+}
+
+table.timesheet td {
+	padding:5px 8px 0px 8px;
+	border-left:1px solid #CCC;
+	border-bottom:1px solid #CCC;
+	border-right:1px solid #CCC;
+}
+
+table.timesheet tr:nth-child(even) {
+    background-color: #FFF;
+}
+
+table.timesheet tr:nth-child(odd) {
+    background-color: #F7F7F7;
+}
+
+div.top-links {
+	position:absolute;
+	top:0px;
+	left:0px; 
+	margin-top:10px;
+}
+ 
+div.top-links a {
+	padding:10px;
+	background-color:#121212;
+	color:#FFF;
+	text-decoration:none;
+	font-size:16px;
+}
+
+div.top-links a:hover {
+	padding:10px;
+	background-color:#7F7F7F;
+	color:#FFFFCC;
+	font-size:16px;
+}
+
+div.top-links a:visited {
+	padding:10px;
+	background-color:#121212;
+	color:#FFF;
+	text-decoration:none;
+	font-size:16px;
+}
+
+div.top-links a:visited:hover {
+	padding:10px;
+	background-color:#7F7F7F;
+	color:#FFFFCC;
+	font-size:16px;
+}
+
+span.total {
+	font-size:16px;
+	color:#000;
+	font-weight:600;
+	display:block;
+	margin-bottom:10px;
+	padding-top:10px;
+}
+
+input {
+	font-size:16px;
+	padding:5px 8px;
+	border:1px solid #CCC;
+	margin-bottom:10px;
+}
+
+textarea {
+	font-size:16px;
+	padding:5px 8px;
+	border:1px solid #CCC;
+}
