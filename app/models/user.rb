@@ -2,11 +2,15 @@ class User < ActiveRecord::Base
   # Authentication
   has_secure_password
   
+  # Scopes
+  scope :worker, where(:report_payroll => true)
+  
   # Attrs
   attr_accessible :email, :password, :password_confirmation
   
   # Relations
   has_many :weeks
+  has_many :cc_batches
   
   # Validations
   validates_presence_of :email

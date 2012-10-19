@@ -1,0 +1,174 @@
+<html>
+  <link type="text/css" href="/assets/reset.css" />
+  <head>
+    <style type="text/css">
+      .clearfix:after {
+      	content: ".";
+      	display: block;
+      	clear: both;
+      	visibility: hidden;
+      	line-height: 0;
+      	height: 0;
+      }
+
+      .clearfix {
+      	display: inline-block;
+      }
+
+      html[xmlns] .clearfix {
+      	display: block;
+      }
+
+      * html .clearfix {
+      	height: 1%;
+      }
+      
+      * {
+        font-family:Arial;
+        font-size:16px;
+      }
+      
+      h1 {
+        font-size:26px;
+      }
+      
+      div.info-line-2 {
+        font-family:Arial;
+        border-bottom:2px solid #000;
+        max-width:800px;
+        font-size:18px;
+        margin-bottom:40px;
+      }
+      
+      div.field-left {
+        width:300px;
+        position:relative;
+        float:left;
+      }
+      div.field-right {
+        width:100px;
+        position:relative;
+        float:right;
+      }
+      table.payroll-table {
+        font-size:18px;
+        font-family:Arial;
+        color:000;
+      }
+      table.payroll-table tr {
+        border-top:2px solid #000;
+      }
+      table.payroll-table th {
+        padding:8px 11px;
+        font-weight:bold;
+        border-right:3px solid #000;
+        border-top:3px solid #000;
+        border-bottom:3px solid #000;
+        text-align:center;
+      }
+      table.payroll-table tr.row td {
+        padding:8px 11px;
+        border-bottom:3px solid #000;
+        border-right:3px solid #000;
+        text-align:center;
+      }
+      table.payroll-table tr.row td.left, th.left {
+        border-left:3px solid #000;
+      }
+      
+      th { background-color:#666; color:#FFF; }
+      tr:nth-child(even){background-color:#FFF}
+      tr:nth-child(odd){background-color:#CCC }
+      td.blank {
+        border-right:3px solid #FFF;
+        border-bottom:3px solid #FFF;
+      }
+      tr.total td.sum {
+        padding:8px 11px;
+        text-align:center;
+        background-color:#000;
+        color:#FFF;
+        font-weight:bold;
+      }
+      div.comments { 
+        margin-top:20px;
+        font-family:Arial;
+        max-width:800px;
+        font-size:12px;
+        padding:15px;
+        border:3px solid #000;
+      }
+      div.comments p {
+        font-size:14px;
+      }
+      div.signatures {
+        margin-top:40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Credit Card Transactional Spreadsheet</h1>
+    <p><strong>Date:</strong> <%= @batch.created_at.strftime("%m/%d/%y %H:%M %p") %></p>
+    <p><strong>Batch/Transaction No.:</strong> <%= @batch.batch_number %></p>
+    <p><strong>Transaction Date:</strong> <%= @batch.batch_date.strftime("%m/%d/%y") %></p>
+    <p><strong>Department Name:</strong> Student Activities - Brown Student Agencies</p>
+    <p><strong>Customer Code:</strong> </p>
+    <p><strong>Total No. of Items:</strong> 1</p>
+    <p><strong>Submitted By:</strong> <%= @batch.user.name %></p>
+    <p><small>Please fill in the information below. Please use the full 10 digit GL Account Number.</small></p>
+    <table class="payroll-table" cellspacing="0">
+      <tr>
+        <th class="left">GL Account No.</th>
+        <th>Master Card</th>
+        <th>Visa</th>
+        <th>Discover</th>
+        <th>Totals</th>
+        <th>AMEX</th>
+        <th>Totals</th>
+      </tr>
+      <tr class="row">
+        <td class="left"><%= @batch.gl_account_number %></td>
+        <td><%= number_to_currency(@batch.mc_total) %></td>
+        <td><%= number_to_currency(@batch.vs_total) %></td>
+        <td><%= number_to_currency(@batch.dis_total) %></td>
+        <td><%= number_to_currency(@batch.mvd_total) %></td>
+        <td><%= number_to_currency(@batch.amex_total) %></td>
+        <td><%= number_to_currency(@batch.amex_total) %></td>
+      </tr>
+      <tr class="row">
+        <td class="left"><strong>Totals</strong></td>
+        <td><%= number_to_currency(@batch.mc_total) %></td>
+        <td><%= number_to_currency(@batch.vs_total) %></td>
+        <td><%= number_to_currency(@batch.dis_total) %></td>
+        <td></td>
+        <td><%= number_to_currency(@batch.amex_total) %></td>
+        <td></td>
+      </tr>
+      <tr class="row">
+        <td class="left"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr class="row">
+        <td class="left"></td>
+        <td></td>
+        <td></td>
+        <td><strong>VS/MC/DIS Total</strong></td>
+        <td style="padding-left:10px"><%= number_to_currency(@batch.mvd_total) %></td>
+        <td><strong>AMEX Total</strong></td>
+        <td style="padding-left:10px"><%= number_to_currency(@batch.amex_total) %></td>
+      </tr>
+    </table>
+    <p>Please mail form to Cashier's Office Box 1911<br>
+      ATTN: Office Manager<br>
+      Phone No. Extension 32151</p>
+    <div class="comments"><strong>Office Use Only:</strong>
+      <p><strong>Item Codes:</strong> 1CDP=VS/MC/DIS &nbsp; 1DAX=AMEX &nbsp; <strong>Pmt Codes:</strong> DCR=VS/MC/DIS &nbsp;DCX=AMEX</p>
+    </div>
+    <p style="page-break-before: always">&nbsp;</p>
+  </body>
+</html>

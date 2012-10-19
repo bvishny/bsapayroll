@@ -5,6 +5,33 @@ class UserController < ApplicationController
     @title = "Enter Payroll"
     (@timesheet = @user.timesheet).update_attributes(params[:timesheet]) if request.post?
   end
+  
+  def new_batch
+    @title = "Record Credit Card Batch"
+    redirect_to "/login?error=p_inv" unless @user.can_submit_batches
+    
+    if request.post?
+      batch = params[:batch]
+      # Set restricted parameters
+      batch[:user_id] = @user.id
+      batch[:gl_account_number] = ""
+      batch[:customer_code] = ""
+      batch[:batch_date] = Date.parse("#{params[:batch]["batch_date(2i)"]}#{params[:batch]["batch_date(3i)"]}#{params[:batch]["batch_date(li)"]}")
+      begin
+        @batch = CCBatch.create(batch) 
+      rescue Exception => e
+        logger.info e.inspect # An error has ocurred - give an error notice if request.post? and the view is being rendered
+      else
+        redirect_to "/user/print_batch/#{@batch.id}"
+      end
+    end
+  end
+  
+  def print_batch
+    @title = "Credit Card Transactional Spreadsheet"
+    @batch = CCBatch.find(params[:id]) if @user.is_admin or @user.can_submit_batches
+    render :layout => false
+  end
 
   def edit
     @title = "Change Password"

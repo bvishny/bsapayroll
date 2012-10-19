@@ -1,0 +1,13 @@
+Dear <%= @user.name %>,
+
+We are emailing you because you still haven't submitted payroll for the past week. If you haven't worked any hours, simply enter all zeroes then submit.
+
+Please click the below link to gain access to your online account and submit payroll:
+
+http://bsapayroll.aws.af.cm/login/reset/<%= @user.auth_key %>?page=submit
+
+This link will only be available until Sunday at 11:59 PM.
+
+Thank you,
+
+Brown Student Agencies 

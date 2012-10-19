@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Time Reporting (Dept Only) - Ex") do |sheet|
+  sheet.add_row [nil,nil,nil, "All Positions / Jobs", nil]
+  sheet.merge_cells("D1:G1")
+  sheet.merge_cells("H1:I1")
+  sheet.add_row ["Last Name", "First Name", "Empl ID", "Position ID", "Hourly Rate", "Position", "Posn Timekeeper", "Regular Hours Code", "Regular Hours Worked"]
+  for week in @weeks
+    blob = "#{week.user.position_id} Student Worker - Ungraded - #{week.user.name} (#{week.user.employee_id}) (+)"
+    sheet.add_row [week.user.name.split(" ")[1], week.user.name.split(" ")[0], week.user.employee_id, week.user.position_id, week.user.hourly_rate, blob, "Donna M Hustler", nil, week.hours]
+  end
+end

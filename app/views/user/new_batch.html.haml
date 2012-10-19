@@ -1,0 +1,37 @@
+- if request.post?
+  %strong{:class => ["notice", "error"]}="Invalid submission. Please verify all dates and numbers are correctly formatted."
+- else
+  %p="Please enter the batch number, batch closing date, and total amount for each card brand."
+.form-box
+  %form{:method=>"post", :action=>"/user/new_batch"}
+    %input{:type => 'hidden', :name => 'authenticity_token', :value => form_authenticity_token}
+    %table{:class => "timesheet", :cellspacing => "0", :border => "0"}
+      %tr
+        %th="Reporting Field"
+        %th="Value"
+      %tr
+        %td="Batch Number"
+        %td
+          %input{:name=>"batch[batch_number]", :size => 20, :value => (params[:batch]) ? params[:batch][:batch_number] : ""}
+      %tr
+        %td="Batch Date"
+        %td{:style=>"padding-bottom:10px"}
+          = date_select("batch", "batch_date", {:use_month_numbers=>true, :date_separator => "/", :discard_year => true, :default => 4.hours.ago})
+      %tr
+        %td="Visa Total"
+        %td
+          %input{:name=>"batch[vs_total]", :size => 3, :value => (params[:batch]) ? params[:batch][:vs_total] : 0.0}
+      %tr
+        %td="MasterCard Total"
+        %td
+          %input{:name=>"batch[mc_total]", :size => 3, :value => (params[:batch]) ? params[:batch][:mc_total] : 0.0}
+      %tr
+        %td="Discover Total"
+        %td
+          %input{:name=>"batch[dis_total]", :size => 3, :value => (params[:batch]) ? params[:batch][:dis_total] : 0.0}
+      %tr
+        %td="AMEX Total"
+        %td
+          %input{:name=>"batch[amex_total]", :size => 3, :value => (params[:batch]) ? params[:batch][:amex_total] : 0.0}
+    %button{:type=>"Submit"}="Record CC Batch"
+  

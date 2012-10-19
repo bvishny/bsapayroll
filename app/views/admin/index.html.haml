@@ -1,0 +1,15 @@
+%p="Please use the below form to export timesheet records:"
+.form-box
+  %form{:method => "post", :action=>"/admin/timesheets"}
+    %input{:type => 'hidden', :name => 'authenticity_token', :value => form_authenticity_token}
+    %p
+      %label="Select Week:"
+      %select{:name=>"weeks_ago"}
+        - (0..6).collect { |w| Week.ends(w) }.select { |w| w.to_time.to_i > 1349408695 }.each_with_index do |date, i|
+          %option{:value=>i}=date.strftime("Week ending %m/%d")
+    %p
+      %label="Format:"
+      %input{:name=>"format", :type=>"radio", :value=>"html"}="HTML"
+      %input{:name=>"format", :type=>"radio", :checked=>"checked", :value=>"xlsx"}="Excel"
+    %p
+      %button{:type=>"submit"}="Export"

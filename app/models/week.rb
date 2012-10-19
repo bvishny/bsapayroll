@@ -57,5 +57,6 @@ class Week < ActiveRecord::Base
   private
   def check_total_hours
      self.errors[:day_6] << "Total hours from Sunday to Saturday cannot exceed 40 hours!" if self.hours > 40
+     self.errors[:day_6] << "You can't submit a negative number of hours!" if self.hours < 0.0
   end
 end

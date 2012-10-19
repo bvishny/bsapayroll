@@ -6,11 +6,13 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
-gem 'pg'
+gem 'mysql2'
 
-# Generate PDFS
-gem "wicked_pdf"
-gem "wkhtmltopdf-heroku", :git => 'git://github.com/camdez/wkhtmltopdf-heroku.git'
+gem "thin"
+
+# Postmark
+gem 'postmark'
+gem 'postmark-rails', '0.4.0'
 
 # Generate XLS Spreadsheets
 gem 'axlsx_rails'
