@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Code:
+  = @promo.code
+%p
+  %b Available:
+  = @promo.available
+%p
+  %b Expires:
+  = @promo.expires
+%p
+  %b Amount:
+  = @promo.amount
+
+= link_to 'Edit', edit_promo_path(@promo)
+\|
+= link_to 'Back', promos_path

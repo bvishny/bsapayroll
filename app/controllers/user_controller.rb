@@ -6,6 +6,12 @@ class UserController < ApplicationController
     (@timesheet = @user.timesheet).update_attributes(params[:timesheet]) if request.post?
   end
   
+  def esign
+    @title = "eSign Payroll"
+    @timesheet = @user.weeks.find(params[:id])
+    @timesheet.update_attributes(params[:timesheet]) if request.post?
+  end
+  
   def new_batch
     @title = "Record Credit Card Batch"
     redirect_to "/login?error=p_inv" unless @user.can_submit_batches

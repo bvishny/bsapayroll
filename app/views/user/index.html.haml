@@ -1,10 +1,13 @@
+%link
 - if request.post?
   %strong{:class => ["notice", ((@timesheet.errors.empty?) ? "success" : "error")]}=((@timesheet.errors.empty?) ? "Timesheet saved. You can edit this sheet until 11:59 PM Sunday." : @timesheet.errors.first[1].to_s)
 - else
   %p="Please enter the hours you worked each day. Provide additional comments if your hours differ from normal."
 .form-box
-  %form{:method=>"post", :action=>"/user"}
+  %form{:method=>"post", :id=>"payroll_form", :action=>"/user"}
     %input{:type => 'hidden', :name => 'authenticity_token', :value => form_authenticity_token}
+    %input{:type => 'hidden', :name => 'timesheet[signature_json]', :id=>"signature_json", :value => ""}
+    %input{:type => 'hidden', :name => 'timesheet[signature_image]', :id=>"signature_image", :value => ""}
     %table{:class => "timesheet", :cellspacing => "0", :border => "0"}
       %tr
         %th="Day"
@@ -15,7 +18,16 @@
           %td
             %input{:name=>"timesheet[day_#{i}]", :size => 2, :value=>@user.timesheet.send("day_#{i}")}
     %span{:class=>"total"}="Total Hours: #{@user.timesheet.hours} ==> #{number_to_currency(@user.timesheet.wages)} before taxes"
-    %label="Comments:"
+    %ul{:class => "sig_show sigNav"}
+      %li{:class => "sig_show drawIt"}
+        %a{:href=>"#draw-it"}="Draw Your Signature"
+      %li{:class => "sig_show clearButton"}
+        %a{:href=>"#clear"}="Clear"
+    %div{:class => "sig_show sig sigWrapper"}
+      .typed
+      %canvas{:class=>"sig_show pad", :width=>"460", :height => "75"}
+      %input{:type => "hidden", :name => "output", :class=>"output"}
+    %label{ :style=>"margin-top:10px" }="Comments:"
     %textarea{:name => "timesheet[comments]", :cols => 40, :rows => 5}=@user.timesheet.comments
-    %button{:type=>"Submit"}="Update Payroll"
+    %button{:type=>"Submit", :onclick=>"$('#signature_json').val(sig.getSignatureString());$('#signature_image').val(sig.getSignatureImage());"}="Update Payroll"
   

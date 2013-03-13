@@ -4,6 +4,23 @@
   <title><%= @title ||= "BSA Payroll" %></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <link rel="stylesheet" href="/signature/jquery.signaturepad.css">
+  <!--[if lt IE 9]><script src="/signature/flashcanvas.js"></script><![endif]--> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="/signature/jquery.signaturepad.min.js"></script>
+  <%- if request.fullpath == "/user" or request.fullpath.include? "/user/esign" or request.fullpath == "/" -%>
+    <script>
+      jQuery( function($) {
+        $(window).load(function()
+        	{
+        	   sig = $('#payroll_form').signaturePad({drawOnly:true, penColour: '#000', onBeforeValidate: function(context, settings) { $('#signature_json').val(context.getSignatureString()); $('#signature_image').val(context.getSignatureImage()) }});
+        	   <%- unless @user.timesheet.signature_json.nil? -%>sig.regenerate(JSON.parse('<%= @user.timesheet.signature_json.html_safe %>'));<%- end -%>
+             $('.sig_show').show();
+        	});
+      });
+    </script>
+  <%- end -%>
+  <script src="/signature/json2.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>

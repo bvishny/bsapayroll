@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @title ||= "BSA" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Submit inventory reports online">
+    <meta name="author" content="Brown Student Agencies">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/inventory">BSA Inventory</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link"><%= @user.name %></a>
+            </p>
+            <ul class="nav">
+              <li<%- if @nav == "record" %> class="active"<%- end -%>><a href="/inventory/record">Record Sale/Transfer</a></li>
+              <li<%- if @nav == "list" %> class="active"<%- end -%>><a href="/inventory">Inventory</a></li>
+              <li<%- if @nav == "ar" %> class="active"<%- end -%>><a href="/ar">Accounts</a></li>
+              <li><a href="/login/logout">Logout</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Customer Service</li>
+              <li<%- if params[:frm] and params[:frm] == "sale" %> class="active"<%- end -%>><a href="/inventory/record?frm=sale">Sale Form</a></li>
+              <li<%- if params[:frm] and params[:frm] == "exchange" %> class="active"<%- end -%>><a href="/inventory/record?frm=exchange">Return w/Exchange</a></li>
+              <li<%- if params[:frm] and params[:frm] == "refund" %> class="active"<%- end -%>><a href="/inventory/record?frm=refund">Return w/Refund/Restock</a></li>
+              <li<%- if params[:frm] and params[:frm] == "refund_trash" %> class="active"<%- end -%>><a href="/inventory/record?frm=refund_trash">Return w/Refund/Trash</a></li>
+              <li class="nav-header">Inventory Operations</li>
+              <li<%- if params[:frm] and params[:frm] == "move" %> class="active"<%- end -%>><a href="/inventory/record?frm=move">Transfer Location</a></li>
+              <li<%- if params[:frm] and params[:frm] == "trash" %> class="active"<%- end -%>><a href="/inventory/record?frm=trash">Trash Garments</a></li>
+              <li<%- if params[:frm] and params[:frm] == "shipment" %> class="active"<%- end -%>><a href="/inventory/record?frm=shipment">Receive Shipment</a></li>
+              <%- if @user.is_admin? -%>
+              <li class="nav-header">Admin</li>
+              <li<%- if @nav and @nav == "products" %> class="active"<%- end -%>><a href="/products">Add Product</a></li>
+              <li<%- if @nav and @nav == "promos" %> class="active"<%- end -%>><a href="/promos">Manage Promo Codes</a></li>
+              <%- end -%>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <%= yield %>
+            
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Brown Student Agencies <%= Time.now.strftime("%Y") %></p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/js/bootstrap-transition.js"></script>
+    <script src="/js/bootstrap-alert.js"></script>
+    <script src="/js/bootstrap-modal.js"></script>
+    <script src="/js/bootstrap-dropdown.js"></script>
+    <script src="/js/bootstrap-scrollspy.js"></script>
+    <script src="/js/bootstrap-tab.js"></script>
+    <script src="/js/bootstrap-tooltip.js"></script>
+    <script src="/js/bootstrap-popover.js"></script>
+    <script src="/js/bootstrap-button.js"></script>
+    <script src="/js/bootstrap-collapse.js"></script>
+    <script src="/js/bootstrap-carousel.js"></script>
+    <script src="/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>

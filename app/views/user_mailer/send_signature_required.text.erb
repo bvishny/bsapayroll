@@ -1,0 +1,9 @@
+Dear <%= @timesheet.user.name %>,
+
+You forgot to sign for last week's payroll! Please use the below link to sign for your submitted hours:
+
+http://bsapayroll.aws.af.cm/user/esign/<%= @timesheet.id %>?auth_key=<%= @timesheet.user.auth_key %>
+
+Thank you,
+
+Brown Student Agencies 

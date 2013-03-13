@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  available: 1
+  expires: 2013-01-27 14:58:39
+  amount: 1.5
+
+two:
+  code: MyString
+  available: 1
+  expires: 2013-01-27 14:58:39
+  amount: 1.5

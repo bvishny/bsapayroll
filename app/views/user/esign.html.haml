@@ -1,0 +1,29 @@
+%link
+- if request.post?
+  %strong{:class => ["notice", ((@timesheet.errors.empty?) ? "success" : "error")]}=((@timesheet.errors.empty?) ? "Thank you for your signature" : @timesheet.errors.first[1].to_s)
+- else
+  %p="Please sign to confirm that you have worked the hours listed below:"
+.form-box
+  %form{:method=>"post", :id=>"payroll_form", :action=>"/user/esign/#{params[:id]}"}
+    %input{:type => 'hidden', :name => 'authenticity_token', :value => form_authenticity_token}
+    %input{:type => 'hidden', :name => 'timesheet[signature_json]', :id=>"signature_json", :value => ""}
+    %input{:type => 'hidden', :name => 'timesheet[signature_image]', :id=>"signature_image", :value => ""}
+    %table{:class => "timesheet", :cellspacing => "0", :border => "0"}
+      %tr
+        %th="Day"
+        %th="# Hours"
+      - (@timesheet.begins..@timesheet.ends).to_a.each_with_index do |date, i|
+        %tr
+          %td=date.strftime("%a %d")
+          %td=@timesheet.send("day_#{i}")
+    %span{:class=>"total"}="Total Hours: #{@timesheet.hours} ==> #{number_to_currency(@timesheet.wages)} before taxes"
+    %ul{:class => "sig_show sigNav"}
+      %li{:class => "sig_show drawIt"}
+        %a{:href=>"#draw-it"}="Draw Your Signature"
+      %li{:class => "sig_show clearButton"}
+        %a{:href=>"#clear"}="Clear"
+    %div{:class => "sig_show sig sigWrapper"}
+      .typed
+      %canvas{:class=>"sig_show pad", :width=>"460", :height => "75"}
+      %input{:type => "hidden", :name => "output", :class=>"output"}
+    %button{:type=>"Submit", :onclick=>"$('#signature_json').val(sig.getSignatureString());$('#signature_image').val(sig.getSignatureImage());"}="Approve Hours"

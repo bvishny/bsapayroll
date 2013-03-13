@@ -33,7 +33,7 @@ class Week < ActiveRecord::Base
   def self.begins(weeks_ago = 0)
     Time.zone = "Eastern Time (US & Canada)"
     time = Time.zone.now
-    weeks_ago += 1 if time.wday.zero?
+    # weeks_ago += 1 if time.wday.zero?
     Time.at((time.to_i - (time.sec + (60 * time.min) + (3600 * time.hour) + ((24 * 3600) * time.wday))) - (weeks_ago * (3600 * 24 * 7))).to_date
   end
   

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_secure_password
   
   # Scopes
-  scope :worker, where(:report_payroll => true)
+  scope :worker, where(:report_payroll => true, :active => true)
   
   # Attrs
   attr_accessible :email, :password, :password_confirmation

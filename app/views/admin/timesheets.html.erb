@@ -26,7 +26,7 @@
       div.info-line {
         font-family:Arial;
         border-bottom:2px solid #000;
-        max-width:800px;
+        max-width:950px;
         font-size:18px;
         margin-bottom:20px;
       }
@@ -34,7 +34,7 @@
       div.info-line-2 {
         font-family:Arial;
         border-bottom:2px solid #000;
-        max-width:800px;
+        max-width:950px;
         font-size:18px;
         margin-bottom:40px;
       }
@@ -136,8 +136,8 @@
       <p><%= week.comments %></p>
     </div>
     <div class="signatures">
-      <div class="info-line-2"><span style="margin-right:300px">Employee's Signature: </span> Date: </div>
-      <div class="info-line"><span style="margin-right:300px">Supervisors Signature: </span> Date: </div>
+      <div class="info-line-2"><span style="margin-right:420px">Employee's Signature (Dated <%= week.updated_at.strftime("%m/%d") %>):</span> <img style="margin-bottom:-20px;display:block" src="<%= week.signature_image.to_s %>" /></div>
+      <div class="info-line"><span style="margin-right:420px">Supervisors Signature: </span> Date: </div>
     </div>
     <p style="page-break-before: always">&nbsp;</p>
     <%- end -%>

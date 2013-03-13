@@ -1,0 +1,50 @@
+<form class="form-log" action="/inventory/record">
+
+                <h2 class="form-log-heading">Record <%= (params[:frm] ||= "sale").gsub("_", "/").capitalize %></h2>
+                <%- for i in 1..5 -%>
+                <p>
+                <strong style="font-size:20px"><%= i %>.</strong> <input type="text" name="ops[<%= i %>][quantity]" class="input" placeholder="Qty" style="width:50px;">
+                <div class="btn-group" style="margin-top:-9px">
+                <button data-toggle="dropdown" class="btn dropdown-toggle"><span id="select-product-<%= i %>">Select Product</span> <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <%- for p in Product.active -%>
+                    <li><a href="#" onclick="$('#select-product-<%= i %>').html('<%= p.name %>');$('#ops-<%= i %>-product-id').val('<%= p.id %>')"><%= p.name %></a></li>
+                  <%- end -%>
+                </ul>
+              </div>
+              <div class="btn-group" data-toggle="buttons-radio" style="margin-top:-9px">
+                 <button type="button" class="btn btn-primary">S</button>
+                 <button type="button" class="btn btn-primary">M</button>
+                 <button type="button" class="btn btn-primary">L</button>
+                 <button type="button" class="btn btn-primary">XL</button>
+                 <button type="button" class="btn btn-primary">2XL</button>
+              </div>
+              <%- case params[:frm] -%>
+              <%- when "shipment" -%>
+              <input type="text" class="input" placeholder="Total Cost" name="ops[<%= i %>][cost]" style="width:75px;">
+              <%- when "trash" -%>
+              <%- when "refund_trash" -%>
+              <%- when "move" -%>
+              <%- else -%>
+              <div class="btn-group" style="margin-top:-9px">
+                <button data-toggle="dropdown" class="btn dropdown-toggle"><span id="promo-code-<%= i %>">Select Discount</span> <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <%- for p in Product.discounts -%>
+                    <li><a href="#" onclick="$('#promo-code-<%= i %>').html('<%= p.code %>');$('#ops-<%= i %>-promo-code').val('<%= p.id %>')"><%= p.code.upcase %></a></li>
+                  <%- end -%>
+                </ul>
+              </div>
+              <input type="hidden" id="ops-<%= i %>-promo_code" name="ops[<%= i %>][promo_code]" value="" />
+              <%- end -%>
+              <input type="hidden" id="ops-<%= i %>-action" name-"ops[<%= i %>][action]" value="<%= params[:frm] ||= "sale" %>" />
+              <input type="hidden" id="ops-<%= i %>-size" name="ops[<%= i %>][size]" value="" />
+              <input type="hidden" id="ops-<%= i %>-product-id" name="ops[<%= i %>][product_id]" value="" />
+              </p>
+              <%- end -%>
+              <p><strong style="font-size:20px">Comments:</strong><br>
+                <textarea name="comments" id="comments" style="width:500px" rows="4"></textarea>
+              </p>
+              <p>
+                <button class="btn btn-large btn-primary" type="submit">Submit</button>
+              </p>
+            </form>
