@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
   validates_length_of :password, :minimum => 6
   
   # Methods
+  def students
+    return find(:all, :conditions => ["(report_payroll = 0 and active = 0) or (report_payroll = 1 and active = 1)"])
+  end
+
   def timesheet
     Week.timesheet_for(self)
   end

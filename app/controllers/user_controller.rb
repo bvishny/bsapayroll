@@ -22,7 +22,11 @@ class UserController < ApplicationController
       batch[:user_id] = @user.id
       batch[:gl_account_number] = ""
       batch[:customer_code] = ""
-      batch[:batch_date] = Date.parse("#{params[:batch]["batch_date(2i)"]}#{params[:batch]["batch_date(3i)"]}#{params[:batch]["batch_date(li)"]}")
+      begin
+        batch[:batch_date] = Date.parse("#{params[:batch]["batch_date(2i)"]}/#{params[:batch]["batch_date(3i)"]}/#{Time.now.year.to_s}")
+      rescue
+        batch[:batch_date] = Time.now
+      end
       begin
         @batch = CCBatch.create(batch) 
       rescue Exception => e

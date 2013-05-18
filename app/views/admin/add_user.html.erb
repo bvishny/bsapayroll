@@ -1,0 +1,13 @@
+<form action="/admin/add_user" method="post">
+	<p>Name: <input type="text" name="user[name]" value=" "/></p>
+	<p>Email: <input type="text" name="user[email]" value=" "/></p>
+	<p>Employee ID: <input type="text" name="user[employee_id]" value=" "/></p>
+	<p>Position ID: <input type="text" name="user[employee_id]" value=" "/></p>
+	<p>Hourly Rate: <input type="text" name="user[hourly_rate]" value=" "/></p>
+	<p>Work Unit: <input type="text" name="user[hourly_rate]" value=" "/></p>
+	<input type="hidden" name="user[is_admin]" value="0" />
+	<input type="hidden" name="user[active]" value="1" />
+	<input type="hidden" name="user[report_payroll]" value="1" />
+	<p>Can Submit Batches: <input type="text" name="user[can_submit_batches]" value="1"/></p>
+	<button type="submit">Submit</button>
+</form>

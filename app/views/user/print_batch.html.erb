@@ -112,7 +112,7 @@
     <p><strong>Batch/Transaction No.:</strong> <%= @batch.batch_number %></p>
     <p><strong>Transaction Date:</strong> <%= @batch.batch_date.strftime("%m/%d/%y") %></p>
     <p><strong>Department Name:</strong> Student Activities - Brown Student Agencies</p>
-    <p><strong>Customer Code:</strong> </p>
+    <p><strong>Customer Code:</strong> BSA</p>
     <p><strong>Total No. of Items:</strong> 1</p>
     <p><strong>Submitted By:</strong> <%= @batch.user.name %></p>
     <p><small>Please fill in the information below. Please use the full 10 digit GL Account Number.</small></p>
@@ -127,7 +127,7 @@
         <th>Totals</th>
       </tr>
       <tr class="row">
-        <td class="left"><%= @batch.gl_account_number %></td>
+        <td class="left">0-38749-4150</td>
         <td><%= number_to_currency(@batch.mc_total) %></td>
         <td><%= number_to_currency(@batch.vs_total) %></td>
         <td><%= number_to_currency(@batch.dis_total) %></td>

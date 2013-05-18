@@ -34,4 +34,11 @@ class AdminController < ApplicationController
     @user.update_attribute(:active, 0)
     render :text => "OK"
   end
+
+  def add_user
+    if request.post?
+      @user = User.create(params[:user])
+      render :text => "OK"
+    end
+  end
 end

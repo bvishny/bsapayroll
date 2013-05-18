@@ -10,6 +10,9 @@ gem 'mysql2'
 
 gem "thin"
 
+gem 'cloudfoundry-jquery-rails'
+gem 'cloudfoundry-devise', :require => 'devise'
+
 # Postmark
 gem 'postmark'
 gem 'postmark-rails', '0.4.0'
